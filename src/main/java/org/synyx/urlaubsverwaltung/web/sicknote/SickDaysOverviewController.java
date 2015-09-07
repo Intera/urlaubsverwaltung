@@ -126,6 +126,11 @@ public class SickDaysOverviewController {
 
             Person person = sickNote.getPerson();
 
+            // Skip sick notes for deactivated persons.
+            if (sickDays.get(person) == null) {
+                continue;
+            }
+
             if (sickNote.getType().equals(SickNoteType.SICK_NOTE_CHILD)) {
                 BigDecimal currentChildSickDays = childSickDays.get(person);
                 childSickDays.put(person,
