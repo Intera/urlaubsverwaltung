@@ -3,7 +3,7 @@ services:
   mariadb:
     image: mariadb:10.4
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - ./mariadb_data:/var/lib/mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     env_file:
@@ -33,6 +33,11 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
 
 volumes:
   mariadb_data: {}
